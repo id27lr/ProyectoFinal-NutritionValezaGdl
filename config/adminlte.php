@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>NutritionValeza</b>Gdl',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -316,17 +316,92 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
+            'text' => 'Dashboard',
+            'url' => '/',
+            'icon' => 'fas fa-fw fa-tachometer-alt',
         ],
         [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
+            'text' => 'Almacen',
+            'icon' => 'fas fa-fw fa-warehouse',
+            'submenu' => [
+                [
+                    'text' => 'Productos',
+                    'url' => '#',
+                    'icon_color' => 'yellow'
+                ],
+                [
+                    'text' => 'Categoria',
+                    'url' => 'almacen/categoria',
+                    'icon_color' => 'cyan'
+                ],
+            ],
         ],
+        [
+            'text' => 'Compras',
+            'icon' => 'fas fa-fw fa-shopping-cart',
+            'submenu' => [
+                [
+                    'text' => 'Igresos',
+                    'url' => '#',
+                    'icon_color' => 'yellow'
+                ],
+                [
+                    'text' => 'Proovedores',
+                    'url' => '#',
+                    'icon_color' => 'cyan'
+                ],
+            ],
+        ],
+        [
+            'text' => 'Ventas',
+            'icon' => 'fas fa-fw fa-dollar-sign',
+            'submenu' => [
+                [
+                    'text' => '',
+                    'url' => '#',
+                    'icon_color' => 'yellow'
+                ],
+                [
+                    'text' => '',
+                    'url' => '#',
+                    'icon_color' => 'cyan'
+                ],
+            ],
+        ],
+        [
+            'text' => 'Seguridad',
+            'icon' => 'fas fa-fw fa-shield-alt',
+            'submenu' => [
+                [
+                    'text' => 'Usuarios',
+                    'url' => '#',
+                    'icon_color' => 'yellow'
+                ],
+                [
+                    'text' => 'Roles',
+                    'url' => '#',
+                    'icon_color' => 'cyan'
+                ],
+            ],
+        ],
+        [
+            'text' => 'Reporteria',
+            'icon' => 'fas fa-fw fa-table',
+            'submenu' => [
+                [
+                    'text' => '',
+                    'url' => '#',
+                    'icon_color' => 'yellow'
+                ],
+                [
+                    'text' => '',
+                    'url' => '#',
+                    'icon_color' => 'cyan'
+                ],
+            ],
+        ],
+        
+
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
@@ -338,62 +413,8 @@ return [
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
-        ],
-        [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
-        ],
     ],
-
+    
     /*
     |--------------------------------------------------------------------------
     | Menu Filters
