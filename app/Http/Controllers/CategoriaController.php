@@ -20,17 +20,18 @@ class CategoriaController extends Controller
 
     public function index(Request $request)
     {
-        if($request){
+        if ($request) {
+            $query = trim($request->get('texto'));
+            $categorias = DB::table('categorias')
+                ->where('categoria', 'LIKE', '%' . $query . '%') // Cambiado 'categorias' a 'categoria'
+                ->where('estatus', '=', '1')
+                ->orderBy('id_categoria', 'desc')
+                ->paginate(7);
 
-            $query = trim($request->get('searchText'));
-            $categorias=DB::table('categorias')->where('categoria','LIKE','%'.$query.'%')
-            ->where('estatus', '=', '1')
-            ->orderBy('id', 'desc')
-            ->paginate(7);
-
-            return view('almacen.categoria.index',['categoria'=>$categorias, 'searchtext'=>$query]);
+            return view('almacen.categoria.index', ['categoria' => $categorias, 'texto' => $query]);
         }
     }
+
     
     /**
      * Show the form for creating a new resource.
