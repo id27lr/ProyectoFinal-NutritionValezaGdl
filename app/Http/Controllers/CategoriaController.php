@@ -91,9 +91,10 @@ class CategoriaController extends Controller
     public function destroy($id)
     {
         $categoria = Categoria::findOrFail($id);
-        $categoria->estatus = 0;
+        $categoria->estatus = '0';
         $categoria->update();
 
-        return Redirect::to('almacen/categoria');
+        return Redirect()->route('categoria.index')
+            ->with('success','Categoria eliminada correctamente');
     }
 }
