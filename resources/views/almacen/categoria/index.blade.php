@@ -58,12 +58,10 @@
                                 @foreach ($categoria as $cat)
                                 <tr>
                                     <td>
-                                        <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
-                                        <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-d">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        <a href="{{ route('categoria.edit',$cat->id)}}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
+                                        <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-d"><i class="fas fa-trash"></i></button>
                                     </td>
-                                    <td>{{ $cat->id_categoria }}</td>
+                                    <td>{{ $cat->id }}</td>
                                     <td>{{ $cat->categoria }}</td>
                                     <td>{{ $cat->descripcion }}</td>
                                 </tr>
