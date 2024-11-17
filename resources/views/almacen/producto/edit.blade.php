@@ -13,7 +13,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="categoria">Nombre</label>
-                    <input type="text" class="form-control" name="categoria" id="categoria" value="{{$categoria->categoria}}" placeholder="Ingresa el nombre de la categoria">
+                    <input type="text" class="form-control" name="categoria" id="categoria" value="{{$categoria->categoria}}" placeholder="Ingresa el nombre del producto">
                 </div>
                 <div class="form-group">
                     <label for="descripcion">Descripcion</label>

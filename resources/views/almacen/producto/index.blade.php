@@ -59,7 +59,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($producto as $prod)
+                                @foreach ($productos as $prod)
                                 <tr>
                                     <td>
                                         <a href="" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
@@ -79,7 +79,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $producto->links() }}
+                        {{ $productos->links() }}
                     </div>
                 </div>
             </div>
