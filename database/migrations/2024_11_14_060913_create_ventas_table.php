@@ -19,7 +19,7 @@ return new class extends Migration
             $table->dateTime('fecha_hora');
             $table->decimal('impuesto', 4, 2);
             $table->decimal('total_venta', 11, 2);
-            $table->string('estado', 20);
+            $table->string('estatus', 20);
             
             $table->timestamps();
 

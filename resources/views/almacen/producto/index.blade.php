@@ -16,7 +16,9 @@
         </div>
     </div>
 </div>
+@endsection
 
+@section('content')
 <section class="section">
     <div class="row" id="table-hover-row">
         <div class="col-12">
@@ -49,32 +51,34 @@
                             <thead>
                                 <tr>
                                     <th>Opciones</th>
-                                    <th>Codigo</th>
+                                    <th>Código</th>
                                     <th>Nombre</th>
                                     <th>Descripción</th>
                                     <th>Stock</th>
                                     <th>Imagen</th>
                                     <th>Estatus</th>
-
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($productos as $prod)
                                 <tr>
                                     <td>
-                                        <a href="" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
-                                        <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#"><i class="fas fa-trash-alt"></i>
-                                        </button>
+                                        <a href="{{ route('producto.edit', $prod->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
+                                        <form action="{{ route('producto.destroy', $prod->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
                                     </td>
                                     <td>{{ $prod->codigo }}</td>
                                     <td>{{ $prod->nombre }}</td>
                                     <td>{{ $prod->descripcion }}</td>
                                     <td>{{ $prod->stock }}</td>
-                                    <td>{{ $prod->imagen }}</td>
-                                    <td>{{ $prod->estado }}</td>
-
-
-
+                                    <td>
+                                        <!-- Mostrar la imagen con la ruta correcta -->
+                                        <img src="{{ asset('/' . $prod->imagen) }}" alt="{{ $prod->nombre }}" style="width: 50px; height: auto;">
+                                    </td>
+                                    <td>{{ $prod->estatus }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

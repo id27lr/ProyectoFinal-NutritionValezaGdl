@@ -14,6 +14,6 @@ class Producto extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['id_categoria','codigo','stock', 'descripcion', 'imagen','estado'];
+    protected $fillable = ['id_categoria','codigo','stock', 'descripcion', 'imagen','status'];
     //
 }

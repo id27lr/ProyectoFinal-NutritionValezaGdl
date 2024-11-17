@@ -7,6 +7,7 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -18,9 +19,9 @@ class ProductoController extends Controller
     public function index(Request $request)
     {
         $texto = trim($request->get('texto'));
-        $productos = DB::table('productos as a') // Usar 'productos' en vez de 'producto'
-            ->join('categorias as c', 'a.id_categoria', '=', 'c.id') // Usar 'categorias' en vez de 'categoria'
-            ->select('a.id', 'a.nombre', 'a.codigo', 'a.stock', 'c.nombre as categoria', 'a.descripcion', 'a.imagen', 'a.estado')
+        $productos = DB::table('productos as a')
+            ->join('categorias as c', 'a.id_categoria', '=', 'c.id')
+            ->select('a.id', 'a.nombre', 'a.codigo', 'a.stock', 'c.categoria as categoria', 'a.descripcion', 'a.imagen', 'a.estatus')
             ->where('a.nombre', 'LIKE', '%' . $texto . '%')
             ->orWhere('a.codigo', 'LIKE', '%' . $texto . '%')
             ->orderBy('a.id', 'desc')
@@ -31,32 +32,33 @@ class ProductoController extends Controller
 
     public function create()
     {
-        $categorias = DB::table('categorias')->where('estatus', '=', '1')->get(); // Usar 'categorias' en vez de 'categoria'
-        return view("almacen.producto.create", ["categorias" => $categorias]);
+        $categorias = DB::table('categorias')->where('estatus', '=', '1')->get();
+        return view('almacen.producto.create', compact('categorias'));
     }
 
     public function store(ProductoFormRequest $request)
     {
         $producto = new Producto;
-        $producto->id_categoria = $request->input('id_categoria'); // Asegúrate de que estás usando 'id_categoria'
+        $producto->id_categoria = $request->input('id_categoria');
         $producto->codigo = $request->input('codigo');
         $producto->nombre = $request->input('nombre');
         $producto->stock = $request->input('stock');
         $producto->descripcion = $request->input('descripcion');
-        $producto->estado = $request->input('estado'); // 'Activo' no está definido, usa lo que venga del request
+        $producto->estatus = $request->input('estatus', 'Activo');
 
+        // Si el formulario tiene una imagen, manejar la carga de la misma
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
-            $nombreimagen = Str::slug($request->nombre) . "." . $imagen->guessExtension();
-            $ruta = public_path("/imagenes/productos/");
-
-            // Guarda la imagen en la ruta especificada
-            $imagen->move($ruta, $nombreimagen);
-
-            $producto->imagen = $nombreimagen;
+            $nombreimagen = Str::slug($request->nombre) . '.' . $imagen->getClientOriginalExtension();
+    
+            // Usando el almacenamiento público de Laravel
+            $ruta = $imagen->storeAs('productos', $nombreimagen, 'public');
+    
+            // Almacenamos la ruta de la imagen, accesible públicamente
+            $producto->imagen = 'storage/productos/' . $nombreimagen;
         }
 
-        $producto->save();
+        $producto->save(); // Guardar el producto en la base de datos
         return redirect()->route('producto.index');
     }
 
@@ -81,26 +83,26 @@ class ProductoController extends Controller
         $producto->stock = $request->input('stock');
         $producto->descripcion = $request->input('descripcion');
 
-        if ($request->hasFile("imagen")) {
+        // Actualización de imagen
+        if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
-            $nombreimagen = Str::slug($request->nombre) . "." . $imagen->guessExtension();
-            $ruta = public_path("/imagenes/productos/");
+            $nombreimagen = Str::slug($request->nombre) . '.' . $imagen->getClientOriginalExtension();
 
-            // Guarda la nueva imagen
-            $imagen->move($ruta, $nombreimagen);
+            // Usando el almacenamiento público de Laravel
+            $ruta = $imagen->storeAs('productos', $nombreimagen, 'public');
 
-            $producto->imagen = $nombreimagen;
+            // Actualizamos la ruta de la imagen
+            $producto->imagen = 'storage/productos/' . $nombreimagen;
         }
 
-        $producto->save(); // No olvides guardar los cambios
-
+        $producto->save(); // Guardar los cambios en el producto
         return redirect()->route('producto.index');
     }
 
     public function destroy($id)
     {
         $producto = Producto::findOrFail($id);
-        $producto->estado = "Inactivo";
+        $producto->estatus = "Inactivo";
         $producto->save(); // Guarda el estado actualizado
         return redirect()->route('producto.index');
     }

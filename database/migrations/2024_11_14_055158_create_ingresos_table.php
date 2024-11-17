@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('num_comprobante', 10);
             $table->dateTime('fecha_hora');
             $table->decimal('impuesto');
-            $table->string('estado', 20);
+            $table->string('estatus', 20);
 
             $table->timestamps();
 
