@@ -64,11 +64,7 @@
                                 <tr>
                                     <td>
                                         <a href="{{ route('producto.edit', $prod->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
-                                        <form action="{{ route('producto.destroy', $prod->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
-                                        </form>
+                                        <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#modal-delete-{{ $prod->id }}"><i class="fas fa-trash-alt"></i>
                                     </td>
                                     <td>{{ $prod->codigo }}</td>
                                     <td>{{ $prod->nombre }}</td>
@@ -80,6 +76,7 @@
                                     </td>
                                     <td>{{ $prod->estatus }}</td>
                                 </tr>
+                                @include('almacen.producto.modal')
                                 @endforeach
                             </tbody>
                         </table>
