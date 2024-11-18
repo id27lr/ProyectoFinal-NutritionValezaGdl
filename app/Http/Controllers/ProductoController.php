@@ -7,7 +7,6 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -50,15 +49,11 @@ class ProductoController extends Controller
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
             $nombreimagen = Str::slug($request->nombre) . '.' . $imagen->getClientOriginalExtension();
-    
-            // Usando el almacenamiento público de Laravel
             $ruta = $imagen->storeAs('productos', $nombreimagen, 'public');
-    
-            // Almacenamos la ruta de la imagen, accesible públicamente
             $producto->imagen = 'storage/productos/' . $nombreimagen;
         }
 
-        $producto->save(); // Guardar el producto en la base de datos
+        $producto->save();
         return redirect()->route('producto.index');
     }
 
@@ -70,8 +65,8 @@ class ProductoController extends Controller
     public function edit($id)
     {
         $producto = Producto::findOrFail($id);
-        $categorias = DB::table('categorias')->where('estatus', '=', '1')->get(); // Usar 'categorias'
-        return view("almacen.producto.edit", compact('producto', 'categorias')); // Corregir la forma de pasar datos
+        $categorias = DB::table('categorias')->where('estatus', '=', '1')->get();
+        return view('almacen.producto.edit', compact('producto', 'categorias'));
     }
 
     public function update(ProductoFormRequest $request, $id)
@@ -87,15 +82,11 @@ class ProductoController extends Controller
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
             $nombreimagen = Str::slug($request->nombre) . '.' . $imagen->getClientOriginalExtension();
-
-            // Usando el almacenamiento público de Laravel
             $ruta = $imagen->storeAs('productos', $nombreimagen, 'public');
-
-            // Actualizamos la ruta de la imagen
             $producto->imagen = 'storage/productos/' . $nombreimagen;
         }
 
-        $producto->save(); // Guardar los cambios en el producto
+        $producto->save();
         return redirect()->route('producto.index');
     }
 
@@ -103,7 +94,7 @@ class ProductoController extends Controller
     {
         $producto = Producto::findOrFail($id);
         $producto->estatus = "Inactivo";
-        $producto->save(); // Guarda el estado actualizado
+        $producto->save(); 
         return redirect()->route('producto.index');
     }
 }
