@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('direccion', 70);
             $table->string('telefono', 15);
             $table->string('email', 50);
+            $table->tinyInteger('estatus'); 
+
 
             $table->timestamps();
         });

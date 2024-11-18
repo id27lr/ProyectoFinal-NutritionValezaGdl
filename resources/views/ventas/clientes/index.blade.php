@@ -16,7 +16,9 @@
         </div>
     </div>
 </div>
+@endsection
 
+@section('content')
 <section class="section">
     <div class="row" id="table-hover-row">
         <div class="col-12">
@@ -61,13 +63,9 @@
                                 @foreach ($clientes as $cli)
                                 <tr>
                                     <td>
-                                        <!-- Enlace para editar cliente -->
-                                        <a href="{{ route('clientes.edit', $cli->id) }}" class="btn btn-warning btn-sm">
-                                            <i class="fas fa-pen"></i>
-                                        </a>
-                                        
-                                        <!-- Botón para eliminar cliente -->
-                                        <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#">
+                                        <a href="{{ route('clientes.edit', $cli->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
+                                        <!-- Botón para abrir el modal de eliminación -->
+                                        <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#modal-delete-{{ $cli->id }}">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
@@ -78,6 +76,31 @@
                                     <td>{{ $cli->telefono }}</td>
                                     <td>{{ $cli->email }}</td>
                                 </tr>
+
+                                <!-- Modal de confirmación de eliminación -->
+                                <div class="modal fade" id="modal-delete-{{ $cli->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <form action="{{ route('clientes.destroy', $cli->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <div class="modal-content bg-danger">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ¿Estás seguro de que deseas eliminar al cliente <strong>{{ $cli->nombre }}</strong>?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-outline-light">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                                 @endforeach
                             </tbody>
                         </table>
@@ -89,3 +112,4 @@
     </div>
 </section>
 @endsection
+
