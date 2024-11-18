@@ -61,8 +61,14 @@
                                 @foreach ($clientes as $cli)
                                 <tr>
                                     <td>
-                                        <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
-                                        <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#"><i class="fas fa-trash-alt"></i>
+                                        <!-- Enlace para editar cliente -->
+                                        <a href="{{ route('clientes.edit', $cli->id) }}" class="btn btn-warning btn-sm">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                        
+                                        <!-- Botón para eliminar cliente -->
+                                        <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#">
+                                            <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
                                     <td>{{ $cli->nombre }}</td>
@@ -71,7 +77,6 @@
                                     <td>{{ $cli->direccion }}</td>
                                     <td>{{ $cli->telefono }}</td>
                                     <td>{{ $cli->email }}</td>
-
                                 </tr>
                                 @endforeach
                             </tbody>

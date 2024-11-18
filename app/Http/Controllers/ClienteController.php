@@ -61,18 +61,25 @@ class ClienteController extends Controller
 
     public function update(ClienteFormRequest $request, $id)
     {
+        // Obtén el cliente con el ID
         $cliente = Cliente::findOrFail($id);
-        $cliente->tipo_persona = $request->get('tipo_persona');
+
+        // Actualiza los campos del cliente
         $cliente->nombre = $request->get('nombre');
         $cliente->tipo_documento = $request->get('tipo_documento');
         $cliente->num_documento = $request->get('num_documento');
         $cliente->direccion = $request->get('direccion');
         $cliente->telefono = $request->get('telefono');
         $cliente->email = $request->get('email');
-        $cliente->update();
 
-        return Redirect::to('ventas/clientes');
+        // Guarda los cambios en la base de datos
+        $cliente->save();
+
+        // Redirige a la lista de clientes con mensaje de éxito
+        return Redirect::to('ventas/clientes')
+            ->with('success', 'Cliente actualizado correctamente');
     }
+
 
     public function destroy($id)
     {
