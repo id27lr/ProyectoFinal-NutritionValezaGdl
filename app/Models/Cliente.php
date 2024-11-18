@@ -10,7 +10,7 @@ class Cliente extends Model
     use HasFactory;
 
     protected $table = 'personas'; // Nombre de la tabla en la base de datos
-    protected $primaryKey = 'id_persona'; // Nombre de la clave primaria personalizada
+    protected $primaryKey = 'id'; // Nombre de la clave primaria personalizada
 
     public $timestamps = false; // Desactiva los timestamps si no usas created_at y updated_at
 

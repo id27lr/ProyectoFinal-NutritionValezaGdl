@@ -46,19 +46,6 @@
             </div>
 
             <div class="form-group">
-                <label for="unidad">Unidad</label>
-                <select name="unidad" class="form-control @error('unidad') is-invalid @enderror" id="unidad">
-                    <option value="Piezas" {{ old('unidad') == 'Piezas' ? 'selected' : '' }}>Piezas</option>
-                    <option value="Kilos" {{ old('unidad') == 'Kilos' ? 'selected' : '' }}>Kilos</option>
-                    <option value="Cajas" {{ old('unidad') == 'Cajas' ? 'selected' : '' }}>Cajas</option>
-                    <option value="Paquetes" {{ old('unidad') == 'Paquetes' ? 'selected' : '' }}>Paquetes</option>
-                </select>
-                @error('unidad')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
-            <div class="form-group">
                 <label for="descripcion">Descripción</label>
                 <input type="text" class="form-control @error('descripcion') is-invalid @enderror" name="descripcion" id="descripcion" placeholder="Ingresa la descripción del producto" value="{{ old('descripcion') }}">
                 @error('descripcion')

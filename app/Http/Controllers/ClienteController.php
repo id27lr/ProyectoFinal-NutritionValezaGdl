@@ -22,7 +22,7 @@ class ClienteController extends Controller
             $clientes = DB::table('personas') // Usamos la tabla 'personas'
                 ->where('nombre', 'LIKE', '%' . $query . '%')
                 ->where('tipo_persona', '=', 'Cliente') // Filtramos solo clientes
-                ->orderBy('id_persona', 'desc') // Ordenamos por 'id_persona'
+                ->orderBy('id', 'desc') // Ordenamos por 'id_persona'
                 ->paginate(7);
 
             return view('ventas.clientes.index', ['clientes' => $clientes, 'texto' => $query]);
@@ -37,7 +37,7 @@ class ClienteController extends Controller
     public function store(ClienteFormRequest $request)
     {
         $cliente = new Cliente;
-        $cliente->tipo_persona = $request->get('tipo_persona');
+        $cliente->tipo_persona = 'Cliente';
         $cliente->nombre = $request->get('nombre');
         $cliente->tipo_documento = $request->get('tipo_documento');
         $cliente->num_documento = $request->get('num_documento');

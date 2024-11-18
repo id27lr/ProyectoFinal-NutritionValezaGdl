@@ -11,7 +11,7 @@ class ClienteFormRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,6 @@ class ClienteFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tipo_persona' => 'required|max:50',
             'nombre' => 'required|max:100',
             'tipo_documento' => 'max:50',
             'numero_documento' => 'max:50',

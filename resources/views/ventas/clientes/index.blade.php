@@ -51,6 +51,7 @@
                                     <th>Opciones</th>
                                     <th>Nombre</th>
                                     <th>Tipo Documento</th>
+                                    <th>Numero Documento</th>
                                     <th>Direccion</th>
                                     <th>Telefono</th>
                                     <th>Email</th>
@@ -64,12 +65,12 @@
                                         <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#"><i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
-                                    <td>{{ $cliente->nombre }}</td>
-                                    <td>{{ $cliente->tipo_documento }}</td>
-                                    <td>{{ $cliente->num_documento }}</td>
-                                    <td>{{ $cliente->direccion }}</td>
-                                    <td>{{ $cliente->telefono }}</td>
-                                    <td>{{ $cliente->email }}</td>
+                                    <td>{{ $cli->nombre }}</td>
+                                    <td>{{ $cli->tipo_documento }}</td>
+                                    <td>{{ $cli->num_documento }}</td>
+                                    <td>{{ $cli->direccion }}</td>
+                                    <td>{{ $cli->telefono }}</td>
+                                    <td>{{ $cli->email }}</td>
 
                                 </tr>
                                 @endforeach
