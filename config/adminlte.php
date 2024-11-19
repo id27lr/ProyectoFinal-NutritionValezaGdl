@@ -326,7 +326,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Productos',
-                    'url' => '#',
+                    'url' => 'almacen/producto',
                     'icon_color' => 'yellow'
                 ],
                 [
@@ -357,12 +357,12 @@ return [
             'icon' => 'fas fa-fw fa-dollar-sign',
             'submenu' => [
                 [
-                    'text' => '',
-                    'url' => '#',
+                    'text' => 'Clientes',
+                    'url' => 'ventas/clientes',
                     'icon_color' => 'yellow'
                 ],
                 [
-                    'text' => '',
+                    'text' => 'Ventas',
                     'url' => '#',
                     'icon_color' => 'cyan'
                 ],
