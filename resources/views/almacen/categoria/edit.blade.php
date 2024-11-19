@@ -1,12 +1,14 @@
 @extends('adminlte::page')
 
 @section('content_header')
+    <div class="card-header">
+        <h1>Editar Categoria {{ $categoria->categoria}}</h1>
+    </div>
+@endsection
+
+@section('content')
 
     <div class="col-md-6">
-        <div class="card-header">
-            <h3 class="card-title">Editar Categoria {{ $categoria->categoria}}</h3>
-        </div>
-
         <form action="{{ route('categoria.update', $categoria->id) }}" method="POST" class="form">
         @csrf
         @method('PUT')
@@ -26,6 +28,5 @@
                 </div>
         </form>
     </div>
-</div>
 
 @endsection

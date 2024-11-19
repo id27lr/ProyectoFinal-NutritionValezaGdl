@@ -1,12 +1,13 @@
 @extends('adminlte::page')
 
 @section('content_header')
+    <div class="card-header">
+        <h1>Nueva Categoria</h1>
+    </div>
+@endsection
 
+@section('content')
     <div class="col-md-6">
-        <div class="card-header">
-            <h3 class="card-title">Nueva Categoria</h3>
-        </div>
-
         <form action="{{ route('categoria.store') }}" method="POST" class="form">
         @csrf
             <div class="card-body">
@@ -25,6 +26,4 @@
                 </div>
         </form>
     </div>
-</div>
-
 @endsection

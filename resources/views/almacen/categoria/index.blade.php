@@ -16,6 +16,9 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('content')
 
 <section class="section">
     <div class="row" id="table-hover-row">

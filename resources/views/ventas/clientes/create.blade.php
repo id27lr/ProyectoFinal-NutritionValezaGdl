@@ -2,7 +2,7 @@
 
 @section('content_header')
     <div class="card-header">
-        <h3 class="card-title">Nuevo Cliente</h3>
+        <h1>Nuevo Cliente</h3>
     </div>
 @endsection
 

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
 @section('content_header')
-<div class="card-header">
-    <h3 class="card-title">Nuevo Proveedor</h3>
-</div>
+    <div class="card-header">
+        <h1>Nuevo Proveedor</h1>
+    </div>
 @endsection
 
 @section('content')
