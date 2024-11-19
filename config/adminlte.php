@@ -347,7 +347,7 @@ return [
                 ],
                 [
                     'text' => 'Proovedores',
-                    'url' => '#',
+                    'url' => 'compras/proveedor',
                     'icon_color' => 'cyan'
                 ],
             ],
