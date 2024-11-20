@@ -341,12 +341,12 @@ return [
             'icon' => 'fas fa-fw fa-shopping-cart',
             'submenu' => [
                 [
-                    'text' => 'Igresos',
-                    'url' => '#',
+                    'text' => 'Ingresos',
+                    'url' => 'compras/ingreso',
                     'icon_color' => 'yellow'
                 ],
                 [
-                    'text' => 'Proovedores',
+                    'text' => 'Proveedores',
                     'url' => 'compras/proveedor',
                     'icon_color' => 'cyan'
                 ],

@@ -14,5 +14,5 @@ class Ingreso extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['id_proovedor', 'comprobante', 'num_comprobante', 'fecha_hora', 'impuesto', 'estatus'];
+    protected $fillable = ['id_proveedor', 'comprobante', 'num_comprobante', 'fecha_hora', 'impuesto', 'estatus'];
 }

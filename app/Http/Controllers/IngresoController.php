@@ -28,13 +28,13 @@ class IngresoController extends Controller
             $ingresos = DB::table('ingresos as i')
                 ->join('personas as p', 'i.id_proveedor', '=', 'p.id')
                 ->join('detalle_ingresos as di', 'di.id_ingreso', '=', 'i.id')
-                ->select('i.id', 'i.fecha_hora','p.nombre', 'i.comprobante', 'i.num_comprobante', 'i.impuesto', 'i.estatus',DB::raw('sum(di.cantidad*di.precio_compra) as total'))
+                ->select('i.id', 'i.fecha_hora','p.nombre', 'i.comprobante', 'i.num_comprobante', 'i.impuesto', 'i.estatus',DB::raw('sum(di.cantidad * di.precio_compra) as total'))
                 ->where('i.num_comprobante', 'LIKE', '%'.$query.'%')
                 ->groupby('i.id', 'i.fecha_hora', 'p.nombre', 'i.comprobante', 'i.num_comprobante', 'i.impuesto', 'i.estatus')
                 ->orderBy('i.id', 'desc')
                 ->paginate(15);
 
-            return view('compras.ingreso.index',['igresos' => $ingresos, 'texto' => $query]);
+            return view('compras.ingreso.index',['ingresos' => $ingresos, 'texto' => $query]);
         }
     }
 
