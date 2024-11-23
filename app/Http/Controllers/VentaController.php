@@ -13,7 +13,7 @@ class VentaController extends Controller
 {
     public function __construct()
     {
-        
+        // Aquí puedes incluir cualquier lógica de inicialización si es necesario
     }
 
     /**
@@ -21,19 +21,24 @@ class VentaController extends Controller
      */
     public function index(Request $request)
     {
-
-        if($request){
+        if ($request) {
             $query = trim($request->get('texto'));
             $ventas = DB::table('ventas as v')
                 ->join('personas as p', 'v.id_cliente', '=', 'p.id')
                 ->join('detalle_ventas as dv', 'dv.id_venta', '=', 'v.id')
-                ->select('v.id', 'v.fecha_hora','p.nombre', 'v.tipo_comprobante', 'v.num_comprobante', 'v.impuesto', 'v.estatus', 'v.total_venta')
-                ->where('v.num_comprobante', 'LIKE', '%'.$query.'%')
-                ->groupby('v.id', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 'v.num_comprobante', 'v.impuesto', 'v.estatus')
+                ->select(
+                    'v.id', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 
+                    'v.num_comprobante', 'v.impuesto', 'v.estatus', 'v.total_venta'
+                )
+                ->where('v.num_comprobante', 'LIKE', '%' . $query . '%')
+                ->groupBy(
+                    'v.id', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 
+                    'v.num_comprobante', 'v.impuesto', 'v.estatus', 'v.total_venta'
+                )
                 ->orderBy('v.id', 'desc')
                 ->paginate(15);
 
-            return view('ventas.venta.index',['ventas' => $ventas, 'texto' => $query]);
+            return view('ventas.venta.index', ['ventas' => $ventas, 'texto' => $query]);
         }
     }
 
@@ -46,12 +51,15 @@ class VentaController extends Controller
 
         $productos = DB::table('productos as p')
             ->join('detalle_ventas as dv', 'dv.id_producto', '=', 'p.id')
-            ->select(DB::raw('CONCAT(p.codigo, " ", p.nombre) AS Producto'), 'p.id', 'p.stock', DB::raw('avg(dv.precio_venta) as precio_promedio'))
+            ->select(
+                DB::raw('CONCAT(p.codigo, " ", p.nombre) AS Producto'),
+                'p.id', 'p.stock', DB::raw('avg(dv.precio_venta) as precio_promedio')
+            )
             ->where('p.estatus', '=', 'Activo')
             ->where('p.stock', '>', '0')
-            ->groupBy('Producto', 'p.id', 'p.stock')
+            ->groupBy('p.id', 'Producto', 'p.stock')
             ->get();
-        
+
         return view('ventas.venta.create', compact('personas', 'productos'));
     }
 
@@ -60,45 +68,49 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-            DB::breginTransaction();
+        try {
+            DB::beginTransaction();  // Corrección de 'beginTransaction'
 
+            // Crear la venta
             $venta = new Venta;
             $venta->id_cliente = $request->get('id_cliente');
             $venta->tipo_comprobante = $request->get('tipo_comprobante');
             $venta->num_comprobante = $request->get('num_comprobante');
             $mytime = Carbon::now('America/Mexico_City');
-            $venta->fecha_hora = $mytime->toDateTineString();        
-            $venta->impuesto = '16';
-            $venta->estatus = 'A';
+            $venta->fecha_hora = $mytime->toDateTimeString();  // 'toDateTimeString' para formato adecuado
+            $venta->impuesto = '16';  // Imposición fija
+            $venta->estatus = 'A';  // Estatus activo por defecto
             $venta->save();
-            
+
+            // Obtener los datos del formulario
             $id_producto = $request->get('id_producto');
             $cantidad = $request->get('cantidad');
             $precio_venta = $request->get('precio_venta');
             $descuento = $request->get('descuento');
-            
+
             $cont = 0;
-
-            while($cont < count($id_producto)){
+            while ($cont < count($id_producto)) {
                 $detalle = new DetalleVenta;
-                $detalle -> id_venta = $venta -> id_venta;
-                $detalle -> id_producto = $id_producto[$cont];
-                $detalle -> cantidad = $cantidad[$cont];
-                $detalle -> precio_venta = $precio_venta[$cont];
-                $detalle -> descuento = $descuento[$cont];
-                $detalle -> save();
+                $detalle->id_venta = $venta->id;  // Correcto: 'id' en lugar de 'id_venta'
+                $detalle->id_producto = $id_producto[$cont];
+                $detalle->cantidad = $cantidad[$cont];
+                $detalle->precio_venta = $precio_venta[$cont];
+                $detalle->descuento = $descuento[$cont];
+                $detalle->save();
 
-                $cont = $cont + 1;
+                $cont++;
             }
 
+            // Si todo fue correcto, confirmar la transacción
             DB::commit();
-            
-        }catch(\Exception $e){
-
+        } catch (\Exception $e) {
+            // Si ocurre un error, hacer rollback
             DB::rollBack();
+            // Puedes loguear el error para mayor detalle si es necesario
+            return redirect()->back()->withErrors(['error' => 'Hubo un error en el proceso.']);
         }
 
+        // Redirigir al listado de ventas
         return Redirect::to('ventas/venta');
     }
 
@@ -107,19 +119,25 @@ class VentaController extends Controller
      */
     public function show($id)
     {
+        // Mostrar los detalles de una venta específica
         $venta = DB::table('ventas as v')
-                ->join('personas as p', 'v.id_cliente', '=', 'p.id')
-                ->join('detalle_ventas as dv', 'dv.id_venta', '=', 'v.id')
-                ->select('v.id', 'v.fecha_hora','p.nombre', 'v.tipo_comprobante', 'v.num_comprobante', 'v.impuesto', 'v.estatus', 'v.total_venta')
-                ->where('v.id', '=', $id)
-                ->first();
-        
+            ->join('personas as p', 'v.id_cliente', '=', 'p.id')
+            ->join('detalle_ventas as dv', 'dv.id_venta', '=', 'v.id')
+            ->select(
+                'v.id', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 
+                'v.num_comprobante', 'v.impuesto', 'v.estatus', 'v.total_venta'
+            )
+            ->where('v.id', '=', $id)
+            ->first();
+
+        // Obtener detalles de los productos asociados a la venta
         $detalles = DB::table('detalle_ventas as dv')
-                ->join('productos as p', 'dv.id_producto', '=', 'p.id')
-                ->select('p.nombre as producto', 'dv.cantidad', 'dv.precio_compra', 'dv.precio_venta')
-                ->where('dv.id_venta', '=', $id)
-                ->get();
-        
+            ->join('productos as p', 'dv.id_producto', '=', 'p.id')
+            ->select('p.nombre as producto', 'dv.cantidad', 'dv.precio_compra', 'dv.precio_venta')
+            ->where('dv.id_venta', '=', $id)
+            ->get();
+
+        // Retornar la vista con los datos de la venta y los detalles
         return view('ventas.venta.show', compact('venta', 'detalles'));
     }
 
@@ -128,9 +146,10 @@ class VentaController extends Controller
      */
     public function destroy($id)
     {
+        // Cambiar el estatus de la venta a "Cancelada"
         $venta = Venta::findOrFail($id);
-        $venta->estatus = "C";
-        $venta->update(); 
+        $venta->estatus = "C";  // "C" para cancelada
+        $venta->update();  // Guardar el cambio
         return Redirect::to('ventas/venta');
     }
 }
