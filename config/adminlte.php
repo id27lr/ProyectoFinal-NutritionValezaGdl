@@ -363,7 +363,7 @@ return [
                 ],
                 [
                     'text' => 'Ventas',
-                    'url' => '#',
+                    'url' => 'ventas/venta',
                     'icon_color' => 'cyan'
                 ],
             ],

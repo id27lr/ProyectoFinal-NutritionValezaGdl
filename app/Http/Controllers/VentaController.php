@@ -45,7 +45,7 @@ class VentaController extends Controller
         $personas = DB::table('personas')->where('tipo_persona', '=', 'Cliente')->get();
 
         $productos = DB::table('productos as p')
-            ->join('detalle_venta as di', 'dv.id_producto', '=', 'p.id')
+            ->join('detalle_ventas as dv', 'dv.id_producto', '=', 'p.id')
             ->select(DB::raw('CONCAT(p.codigo, " ", p.nombre) AS Producto'), 'p.id', 'p.stock', DB::raw('avg(dv.precio_venta) as precio_promedio'))
             ->where('p.estatus', '=', 'Activo')
             ->where('p.stock', '>', '0')
