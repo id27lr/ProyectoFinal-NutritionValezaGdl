@@ -131,9 +131,9 @@ class VentaController extends Controller
             ->first();
 
         // Obtener detalles de los productos asociados a la venta
-        $detalles = DB::table('detalle_ventas as dv')
-            ->join('productos as p', 'dv.id_producto', '=', 'p.id')
-            ->select('p.nombre as producto', 'dv.cantidad', 'dv.precio_compra', 'dv.precio_venta')
+        $detalles = DB::table('detalle_ventas as d')
+            ->join('productos as p', 'd.id_producto', '=', 'p.id')
+            ->select('p.nombre as producto', 'd.cantidad', 'd.descuento', 'd.precio_venta')
             ->where('dv.id_venta', '=', $id)
             ->get();
 
