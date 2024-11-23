@@ -66,7 +66,7 @@
                                 @foreach ($ingresos as $ing)
                                 <tr>
                                     <td>
-                                        <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
+                                        <a href="{{route('ingreso.show', $ing->id)}}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
                                         <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#"><i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
