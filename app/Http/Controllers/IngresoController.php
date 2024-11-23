@@ -64,8 +64,8 @@ class IngresoController extends Controller
 
             $ingreso = new Ingreso;
             $ingreso->id_proveedor = $request->get('id_proveedor');
-            $ingreso->comproante = $request->get('comprobante');
-            $ingreso->num_comproante = $request->get('num_comprobante');
+            $ingreso->comprobante = $request->get('comprobante');
+            $ingreso->num_comprobante = $request->get('num_comprobante');
             $mytime = Carbon::now('America/Mexico_City');
             $ingreso->fecha_hora = $mytime->toDateTineString();        
             $ingreso->impuesto = '16';
@@ -125,29 +125,13 @@ class IngresoController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
-        $producto = Ingreso::findOrFail($id);
-        $producto->estatus = "C";
-        $producto->update(); 
+        $ingreso = Ingreso::findOrFail($id);
+        $ingreso->estatus = "C";
+        $ingreso->update(); 
         return Redirect::to('compras/ingreso');
     }
 }
