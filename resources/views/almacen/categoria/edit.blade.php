@@ -1,5 +1,8 @@
 @extends('adminlte::page')
 
+@section('title', 'Editar Categorías')
+
+
 @section('content_header')
     <div class="card-header">
         <h1>Editar Categoria {{ $categoria->categoria}}</h1>

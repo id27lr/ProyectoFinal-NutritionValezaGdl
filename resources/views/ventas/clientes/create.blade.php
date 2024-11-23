@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Crear Clientes')
+
 @section('content_header')
     <div class="card-header">
         <h1>Nuevo Cliente</h3>

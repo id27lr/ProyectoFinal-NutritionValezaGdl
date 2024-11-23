@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Crear Proveedores')
+
 @section('content_header')
     <div class="card-header">
         <h1>Nuevo Proveedor</h1>

@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Editar Clientes')
+
 @section('content_header')
     <div class="card-header">
         <h1>Editar Cliente: {{ $cliente->nombre }}</h1>

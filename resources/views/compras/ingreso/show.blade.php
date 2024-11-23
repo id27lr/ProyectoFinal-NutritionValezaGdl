@@ -1,6 +1,9 @@
 @extends('adminlte::page')
 @extends('layouts.app')
 
+@section('title', 'Mostrar Ingresos')
+
+
 @section('content_header')
 <div class="card-header">
     <h1>Detalle Ingreso</h1>

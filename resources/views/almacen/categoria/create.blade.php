@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Crear Categorías')
+
 @section('content_header')
     <div class="card-header">
         <h1>Nueva Categoria</h1>

@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Categorías')
+
 @section('content_header')
 <div class="content-header">
     <div class="container-fluid">
