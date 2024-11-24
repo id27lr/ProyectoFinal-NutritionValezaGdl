@@ -19,7 +19,7 @@ class ProductoSeeder extends Seeder
             'Nombre' => 'Suplemento De Calostro Bovino Advance Nutrition',
             'stock' => 10,
             'descripcion' => 'Promueve la mejora de la salud intestinal y apoyo nutricional, promueve la recuperación muscular después del ejercicio intenso, así como mejorar el rendimiento físico y resistencia.',
-            'imagen' => 'storage/productos/proteina-1.jpg',
+            'imagen' => 'imagenes/productos/proteina-1.jpg',
             'estatus' => 'Activo'
         ]);
         
@@ -29,7 +29,7 @@ class ProductoSeeder extends Seeder
             'Nombre' => 'Proteína Hydrotein Vainilla Canela 5 Lbs Advance Nutrition',
             'stock' => 16,
             'descripcion' => 'Promueve la mejora de la síntesis de proteínas musculares y acelera la recuperación después del ejercicio.',
-            'imagen' => 'storage/productos/proteina-2.jpg',
+            'imagen' => 'imagenes/productos/proteina-2.jpg',
             'estatus' => 'Activo'
         ]);
         
@@ -39,7 +39,7 @@ class ProductoSeeder extends Seeder
             'Nombre' => 'Creatina Monohidratada 500 G 100 Servicios Advance Nutrition',
             'stock' => 8,
             'descripcion' => 'Mejora el rendimiento físico en entrenamientos intensos. Acelera la recuperación muscular tras cada sesión. Aumenta la resistencia en ejercicios de fuerza y potencia.',
-            'imagen' => 'storage/productos/creatina-1.jpg',
+            'imagen' => 'imagenes/productos/creatina-1.jpg',
             'estatus' => 'Activo'
         ]);
         
