@@ -374,7 +374,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Usuarios',
-                    'url' => '#',
+                    'url' => 'seguridad/usuarios',
                     'icon_color' => 'yellow'
                 ],
                 [
