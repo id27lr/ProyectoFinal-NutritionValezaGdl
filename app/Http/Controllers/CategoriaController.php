@@ -52,7 +52,7 @@ class CategoriaController extends Controller
         $categoria->estatus = 1;
         $categoria->save();
 
-        return Redirect::to('almacen/categoria');
+        return Redirect::to('almacen/categoria')->with('success','Categoria creada exitosamente');;
         
     }
 

@@ -371,6 +371,7 @@ return [
         [
             'text' => 'Seguridad',
             'icon' => 'fas fa-fw fa-shield-alt',
+            'can' => 'asignar roles',
             'submenu' => [
                 [
                     'text' => 'Usuarios',

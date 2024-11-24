@@ -22,6 +22,13 @@
 @endsection
 
 @section('content')
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 <section class="section">
     <div class="row" id="table-hover-row">
         <div class="col-12">

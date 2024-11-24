@@ -55,7 +55,7 @@ class proveedorController extends Controller
         $proveedor->estatus = 1; // Establecemos que el proveedor está activo
         $proveedor->save();
 
-        return Redirect::to('compras/proveedor');
+        return Redirect::to('compras/proveedor')->with('success','Proveedor creado exitosamente');;
     }
 
     /**

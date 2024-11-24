@@ -9,6 +9,13 @@
 @endsection
 
 @section('content')
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 <div class="col-md-6">
     <form action="{{ route('usuarios.update', $usuario->id) }}" method="POST" class="form">
         @csrf

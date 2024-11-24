@@ -20,7 +20,7 @@
                         <label for="cliente">Cliente</label>
                         <select name="id_cliente" class="form-control @error('id_proveedor') is-invalid @enderror" id="id_cliente">
                             @foreach($personas as $persona)
-                            <option value="{{$persona->id_persona}}">{{$persona->nombre}}</option>
+                            <option value="{{$persona->id}}">{{$persona->nombre}}</option>
                             @endforeach
                         </select>
                     </div>

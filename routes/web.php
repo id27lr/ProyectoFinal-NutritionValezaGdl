@@ -34,7 +34,6 @@ Route::middleware('auth')->group(function () {
         Route::put('seguridad/usuarios/{user}/roles', [UserRoleController::class, 'update'])->name('seguridad.roles.update');
     });
 
-    
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     
 });

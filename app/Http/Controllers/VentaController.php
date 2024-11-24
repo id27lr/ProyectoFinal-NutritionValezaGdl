@@ -111,7 +111,7 @@ class VentaController extends Controller
         }
 
         // Redirigir al listado de ventas
-        return Redirect::to('ventas/venta');
+        return Redirect::to('ventas/venta')->with('success','Venta creada exitosamente');;
     }
 
     /**

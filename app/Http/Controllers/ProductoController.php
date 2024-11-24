@@ -54,7 +54,7 @@ class ProductoController extends Controller
         }
 
         $producto->save();
-        return redirect()->route('producto.index');
+        return redirect()->route('producto.index')->with('success','Producto creado exitosamente');
     }
 
     public function show($id)

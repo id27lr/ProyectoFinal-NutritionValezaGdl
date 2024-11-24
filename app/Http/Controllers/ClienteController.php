@@ -51,7 +51,7 @@ class ClienteController extends Controller
         $cliente->estatus = 1; // Establecemos que el cliente está activo
         $cliente->save();
 
-        return Redirect::to('ventas/clientes');
+        return Redirect::to('ventas/clientes')->with('success','Cliente creado exitosamente');;
     }
 
     public function show($id)
