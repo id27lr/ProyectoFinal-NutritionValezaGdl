@@ -72,13 +72,13 @@
                                 @foreach ($ventas as $ven)
                                 <tr>
                                     <td>
-                                        <a href="{{route('venta.show', $ven->id)}}" class="btn btn-warnven btn-sm"><i class="fas fa-pen"></i></a>
+                                        <a href="{{route('venta.show', $ven->id)}}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
                                         <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#"><i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
                                     <td>{{ $ven->fecha_hora }}</td>
                                     <td>{{ $ven->nombre }}</td>
-                                    <td>{{ $ven->comprobante.': '. $ven->num_comprobante}}</td>
+                                    <td>{{ $ven->tipo_comprobante.': '. $ven->num_comprobante}}</td>
                                     <td>{{ $ven->impuesto }}</td>
                                     <td>{{ $ven->total_venta}}</td>
                                     <td>{{ $ven->estatus }}</td>

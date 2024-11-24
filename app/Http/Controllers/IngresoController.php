@@ -67,7 +67,7 @@ class IngresoController extends Controller
             $ingreso->comprobante = $request->get('comprobante');
             $ingreso->num_comprobante = $request->get('num_comprobante');
             $mytime = Carbon::now('America/Mexico_City');
-            $ingreso->fecha_hora = $mytime->toDateTineString();        
+            $ingreso->fecha_hora = $mytime->toDateTimeString();        
             $ingreso->impuesto = '16';
             $ingreso->estatus = 'A';
             $ingreso->save();

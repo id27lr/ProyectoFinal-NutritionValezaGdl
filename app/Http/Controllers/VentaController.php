@@ -120,7 +120,7 @@ class VentaController extends Controller
     public function show($id)
     {
         // Mostrar los detalles de una venta específica
-        $venta = DB::table('ventas as v')
+        $ventas = DB::table('ventas as v')
             ->join('personas as p', 'v.id_cliente', '=', 'p.id')
             ->join('detalle_ventas as dv', 'dv.id_venta', '=', 'v.id')
             ->select(
@@ -131,14 +131,14 @@ class VentaController extends Controller
             ->first();
 
         // Obtener detalles de los productos asociados a la venta
-        $detalles = DB::table('detalle_ventas as d')
-            ->join('productos as p', 'd.id_producto', '=', 'p.id')
-            ->select('p.nombre as producto', 'd.cantidad', 'd.descuento', 'd.precio_venta')
+        $detalles = DB::table('detalle_ventas as dv')
+            ->join('productos as p', 'dv.id_producto', '=', 'p.id')
+            ->select('p.nombre as producto', 'dv.cantidad', 'dv.descuento', 'dv.precio_venta')
             ->where('dv.id_venta', '=', $id)
             ->get();
 
         // Retornar la vista con los datos de la venta y los detalles
-        return view('ventas.venta.show', compact('venta', 'detalles'));
+        return view('ventas.venta.show', compact('ventas', 'detalles'));
     }
 
     /**
