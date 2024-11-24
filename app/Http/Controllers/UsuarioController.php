@@ -23,6 +23,7 @@ class UsuarioController extends Controller
             $query = trim($request->get('texto'));
             $usuarios = DB::table('users')
                 ->where('name', 'LIKE', '%' . $query . '%')
+                ->where('estatus', '=', '1')
                 ->orderBy('id', 'desc')
                 ->paginate(7);
 
@@ -69,5 +70,13 @@ class UsuarioController extends Controller
 
         // Redirigir con mensaje de éxito
         return Redirect::to('seguridad/usuarios')->with('success', 'usuario actualizado correctamente');
+    }
+
+    public function destroy($id)
+    {
+        $usuario = User::findOrFail($id);
+        $usuario->estatus = 0;
+        $usuario->save(); 
+        return redirect()->route('usuarios.index');
     }
 }

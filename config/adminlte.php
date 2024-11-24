@@ -317,7 +317,7 @@ return [
         ],
         [
             'text' => 'Dashboard',
-            'url' => '/',
+            'url' => '/home',
             'icon' => 'fas fa-fw fa-tachometer-alt',
         ],
         [
@@ -384,24 +384,7 @@ return [
                 ],
             ],
         ],
-        [
-            'text' => 'Reporteria',
-            'icon' => 'fas fa-fw fa-table',
-            'submenu' => [
-                [
-                    'text' => '',
-                    'url' => '#',
-                    'icon_color' => 'yellow'
-                ],
-                [
-                    'text' => '',
-                    'url' => '#',
-                    'icon_color' => 'cyan'
-                ],
-            ],
-        ],
         
-
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

@@ -64,13 +64,14 @@
                                 <tr>
                                     <td>
                                         <a href="{{ route('usuarios.edit', $usu->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
-                                        <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#modal-delete"><i class="fas fa-trash-alt"></i>
+                                        <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#modal-delete-{{ $usu->id }}"><i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
                                     <td>{{ $usu->id }}</td>
                                     <td>{{ $usu->name }}</td>
                                     <td>{{ $usu->email }}</td>
                                 </tr>
+                                @include('seguridad.usuarios.modal')
                                 @endforeach
                             </tbody>
                         </table>
