@@ -49,7 +49,7 @@ class ProductoSeeder extends Seeder
             'Nombre' => 'Creatina Monohidratada En Polvo Red Gold Sabor Natural 500 G',
             'stock' => 14,
             'descripcion' => 'Sin descripción',
-            'imagen' => 'storage/productos/creatina-2.jpg',
+            'imagen' => 'imagenes/productos/creatina-2.jpg',
             'estatus' => 'Activo'
         ]);
     }
