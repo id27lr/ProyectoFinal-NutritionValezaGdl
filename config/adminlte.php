@@ -379,7 +379,7 @@ return [
                 ],
                 [
                     'text' => 'Roles',
-                    'url' => '#',
+                    'url' => 'seguridad/roles',
                     'icon_color' => 'cyan'
                 ],
             ],

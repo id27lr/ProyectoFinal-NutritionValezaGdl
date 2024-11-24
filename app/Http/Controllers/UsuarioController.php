@@ -14,7 +14,8 @@ class UsuarioController extends Controller
 
     public function __construct()
     {
-        
+        // Asegura que solo los usuarios con el rol de 'admin' pueden acceder a estas rutas
+        $this->middleware('role:admin');
     }
 
     public function index(Request $request)
