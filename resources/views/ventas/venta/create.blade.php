@@ -54,7 +54,7 @@
                         <label for="producto">Productos</label>
                         <select name="id_articulo" class="form-control @error('id_articulo') is-invalid @enderror" id="id_articulo">
                             @foreach($productos as $producto)
-                            <option value="{{$producto->id_producto}}">{{$producto->artículo}}</option>
+                            <option value="{{$producto->id}}">{{$producto->Producto}}</option>
                             @endforeach
                         </select>
                     </div>
