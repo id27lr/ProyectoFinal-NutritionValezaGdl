@@ -12,7 +12,7 @@ class Proveedor extends Model
     protected $table = 'personas'; // Nombre de la tabla en la base de datos
     protected $primaryKey = 'id'; // Nombre de la clave primaria personalizada
 
-    public $timestamps = false; // Desactiva los timestamps si no usas created_at y updated_at
+    public $timestamps = false; 
 
     protected $fillable = [
         'tipo_persona',
