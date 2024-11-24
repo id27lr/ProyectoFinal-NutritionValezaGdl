@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUsuarioRequest;
+use App\Http\Requests\UsuarioFormRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,7 +35,7 @@ class UsuarioController extends Controller
         return view('seguridad.usuarios.create');
     }
 
-    public function store(StoreUsuarioRequest $request)
+    public function store(UsuarioFormRequest $request)
     {
         // Crear nuevo usuario
         $usuario = new User;
@@ -47,5 +47,27 @@ class UsuarioController extends Controller
         $usuario->save();
         
         return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente.');
+    }
+
+    public function edit($id)
+    {
+        $usuario = User::findOrFail($id);
+        return view('seguridad.usuarios.edit', compact('usuario'));
+    }
+
+    public function update(UsuarioFormRequest $request, $id)
+    {
+
+        // Actualizar los datos del usuario
+        $usuario = User::findOrFail($id);
+        $usuario->name = $request->get('name');
+        $usuario->email = $request->get('email');
+        $usuario->password = Hash::make($request->get('password'));
+
+        // Guardamos los cambios
+        $usuario->save();
+
+        // Redirigir con mensaje de éxito
+        return Redirect::to('seguridad/usuarios')->with('success', 'usuario actualizado correctamente');
     }
 }
